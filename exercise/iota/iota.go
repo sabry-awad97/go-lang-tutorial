@@ -16,16 +16,16 @@ package main
 
 import "fmt"
 
+type Operation int
+
 //* Mathematical operations must be defined as constants using iota
 // iota is used to automatically assign values
 const (
-	Add = iota
+	Add Operation = iota
 	Subtract
 	Multiply
 	Divide
 )
-
-type Operation int
 
 //* Write a receiver function that performs the mathematical operation
 //  on two operands
@@ -43,17 +43,28 @@ func (op Operation) calculate(lhs, rhs int) int {
 	panic("unhandled operation")
 }
 
+func (op Operation) String() string {
+	switch op {
+	case Add:
+		return "Add"
+	case Subtract:
+		return "Subtract"
+	case Multiply:
+		return "Multiply"
+	case Divide:
+		return "Divide"
+	default:
+		return "Other Operation"
+	}
+}
+
 func main() {
 	//* The existing function calls in main() represent the API and cannot be changed
-	add := Operation(Add)
-	fmt.Println(add.calculate(2, 2)) // = 4
+	fmt.Println(Add, Add.calculate(2, 2)) // = 4
 
-	sub := Operation(Subtract)
-	fmt.Println(sub.calculate(10, 3)) // = 7
+	fmt.Println(Subtract, Subtract.calculate(10, 3)) // = 7
 
-	mul := Operation(Multiply)
-	fmt.Println(mul.calculate(3, 3)) // = 9
+	fmt.Println(Multiply, Multiply.calculate(3, 3)) // = 9
 
-	div := Operation(Divide)
-	fmt.Println(div.calculate(100, 2)) // = 50
+	fmt.Println(Divide, Divide.calculate(100, 2)) // = 50
 }
