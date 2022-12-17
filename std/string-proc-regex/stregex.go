@@ -107,11 +107,29 @@ func trimStrings() {
 	}))
 }
 
+func alterStrings() {
+	text := "It was a boat. A small boat."
+	fmt.Println("Replace:", strings.Replace(text, "boat", "canoe", 1))
+	fmt.Println("Replace All:", strings.ReplaceAll(text, "boat", "truck"))
+
+	fmt.Println("Mapped:", strings.Map(func(r rune) rune {
+		if r == 'b' {
+			return 'c'
+		}
+		return r
+	}, text))
+
+	fmt.Println("Replaced:", strings.NewReplacer("boat", "kayak", "small", "huge").Replace(text))
+
+	fmt.Println("Joined:", strings.Join(strings.Fields(text), "--"))
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
 	// convertCase()
 	// inspectStrings()
 	// splitStrings()
-	trimStrings()
+	// trimStrings()
+	alterStrings()
 }
