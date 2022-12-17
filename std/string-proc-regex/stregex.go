@@ -64,9 +64,40 @@ func inspectStrings() {
 	}))
 }
 
+func splitStrings() {
+	description := "A  boat  for  one  person"
+
+	for _, x := range strings.Fields(description) {
+		fmt.Println("Fields >>" + x + "<<")
+	}
+
+	for _, x := range strings.FieldsFunc(description, func(r rune) bool {
+		return r == ' '
+	}) {
+		fmt.Println("FieldsFunc >>" + x + "<<")
+	}
+
+	for _, x := range strings.Split(description, " ") {
+		fmt.Println("Split >>" + x + "<<")
+	}
+
+	for _, x := range strings.SplitN(description, " ", 3) {
+		fmt.Println("SplitN >>" + x + "<<")
+	}
+
+	for _, x := range strings.SplitAfter(description, " ") {
+		fmt.Println("SplitAfterN >>" + x + "<<")
+	}
+
+	for _, x := range strings.SplitAfterN(description, " ", 3) {
+		fmt.Println("SplitAfterN >>" + x + "<<")
+	}
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
 	// convertCase()
-	inspectStrings()
+	// inspectStrings()
+	splitStrings()
 }
