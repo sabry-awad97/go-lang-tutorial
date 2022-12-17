@@ -124,6 +124,19 @@ func alterStrings() {
 	fmt.Println("Joined:", strings.Join(strings.Fields(text), "--"))
 }
 
+func buildString() {
+	text := "It was a boat. A small boat."
+	var builder strings.Builder
+	for _, field := range strings.Fields(text) {
+		if field == "small" {
+			builder.WriteString("very ")
+		}
+		builder.WriteString(field)
+		builder.WriteRune(' ')
+	}
+	fmt.Println("String:", builder.String())
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
@@ -131,5 +144,6 @@ func main() {
 	// inspectStrings()
 	// splitStrings()
 	// trimStrings()
-	alterStrings()
+	// alterStrings()
+	buildString()
 }
