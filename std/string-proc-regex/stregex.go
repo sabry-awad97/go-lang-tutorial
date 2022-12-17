@@ -50,8 +50,23 @@ func convertCase() {
 	}
 }
 
+func inspectStrings() {
+	description := "A boat for one person"
+	fmt.Println("Count: o", strings.Count(description, "o"))
+	fmt.Println("Index: o", strings.Index(description, "o"))
+	fmt.Println("LastIndex: o", strings.LastIndex(description, "o"))
+	fmt.Println("IndexAny: abcd", strings.IndexAny(description, "abcd"))
+	fmt.Println("LastIndex: o", strings.LastIndex(description, "o"))
+	fmt.Println("LastIndexAny: abcd", strings.LastIndexAny(description, "abcd"))
+
+	fmt.Println("IndexFunc:", strings.IndexFunc(description, func(r rune) bool {
+		return r == 'B' || r == 'b'
+	}))
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
-	convertCase()
+	// convertCase()
+	inspectStrings()
 }
