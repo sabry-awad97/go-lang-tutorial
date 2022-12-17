@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"strings"
 )
@@ -17,6 +18,15 @@ func compareStrings() {
 	fmt.Println("HasSuffix: yak", strings.HasSuffix(product, "yak"))
 }
 
+func compareBytes() {
+	price := "€100"
+	fmt.Println("Price in bytes: ", []byte(price))
+	fmt.Println("Strings Prefix €: ", strings.HasPrefix(price, "€"))
+	fmt.Println("Bytes Prefix:", bytes.HasPrefix([]byte(price),
+		[]byte{226, 130}))
+}
+
 func main() {
-	compareStrings()
+	// compareStrings()
+	compareBytes()
 }
