@@ -94,10 +94,24 @@ func splitStrings() {
 	}
 }
 
+func trimStrings() {
+	description := "A boat for one person"
+	fmt.Println("Trimmed:", ">>"+strings.TrimSpace("  Alice  ")+"<<")
+	fmt.Println("Trimmed:", ">>"+strings.Trim(description, "Asno ")+"<<")
+
+	fmt.Println("Trimmed:", strings.TrimPrefix(description, "A boat "))
+	fmt.Println("Not trimmed:", strings.TrimPrefix(description, "A hat "))
+
+	fmt.Println("Trimmed:", strings.TrimFunc(description, func(r rune) bool {
+		return r == 'A' || r == 'n'
+	}))
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
 	// convertCase()
 	// inspectStrings()
-	splitStrings()
+	// splitStrings()
+	trimStrings()
 }
