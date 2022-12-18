@@ -132,6 +132,22 @@ func sortWithField() {
 	}
 }
 
+func ComparisonFunction() {
+	products := []Product{
+		{"Kayak", 279},
+		{"Lifejacket", 49.95},
+		{"Soccer Ball", 19.50},
+	}
+
+	SortWith(products, func(p1, p2 Product) bool {
+		return p1.Price < p2.Price
+	})
+
+	for _, p := range products {
+		Printfln("Name: %v, Price: %.2f", p.Name, p.Price)
+	}
+}
+
 func main() {
 	// mathFunc()
 	// generateRondomNumbers()
@@ -141,5 +157,6 @@ func main() {
 	// sortedCopy()
 	// searchingSortedData()
 	// sortingCustomDataTypes()
-	sortWithField()
+	// sortWithField()
+	ComparisonFunction()
 }

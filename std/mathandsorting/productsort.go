@@ -41,3 +41,18 @@ func ProductSlicesByName(p []Product) {
 func (p ProductSliceName) Less(i, j int) bool {
 	return p.ProductSlice[i].Name < p.ProductSlice[j].Name
 }
+
+type ProductComparison func(p1, p2 Product) bool
+
+type ProductSliceFlex struct {
+	ProductSlice
+	ProductComparison
+}
+
+func (flex ProductSliceFlex) Less(i, j int) bool {
+	return flex.ProductComparison(flex.ProductSlice[i], flex.ProductSlice[j])
+}
+
+func SortWith(prods []Product, f ProductComparison) {
+	sort.Sort(ProductSliceFlex{prods, f})
+}
