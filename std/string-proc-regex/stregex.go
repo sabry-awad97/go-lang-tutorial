@@ -161,6 +161,29 @@ func matchString() {
 
 }
 
+func findSubStrings() {
+	getSubstring := func(s string, indices []int) string {
+		return string(s[indices[0]:indices[1]])
+	}
+
+	pattern := regexp.MustCompile("K[a-z]{4}|[A-z]oat")
+	description := "Kayak. A boat for one person."
+	firstIndex := pattern.FindStringIndex(description)
+	allIndices := pattern.FindAllStringIndex(description, -1)
+	fmt.Println("First index", firstIndex[0], "-", firstIndex[1],
+		"=", getSubstring(description, firstIndex))
+	for i, idx := range allIndices {
+		fmt.Println("Index", i, "=", idx[0], "-",
+			idx[1], "=", getSubstring(description, idx))
+	}
+
+	fmt.Println("First match:", pattern.FindString(description))
+
+	for i, m := range pattern.FindAllString(description, -1) {
+		fmt.Println("Match", i, "=", m)
+	}
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
@@ -170,5 +193,6 @@ func main() {
 	// trimStrings()
 	// alterStrings()
 	// buildString()
-	matchString()
+	// matchString()
+	findSubStrings()
 }
