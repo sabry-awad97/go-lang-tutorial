@@ -104,6 +104,20 @@ func searchingSortedData() {
 	Printfln("Index of 3: %v (present: %v)", indexOf3, sortedInts[indexOf3] == 3)
 }
 
+func sortingCustomDataTypes() {
+	products := []Product{
+		{"Kayak", 279},
+		{"Lifejacket", 49.95},
+		{"Soccer Ball", 19.50},
+	}
+	
+	ProductSlices(products)
+
+	for _, p := range products {
+		Printfln("Name: %v, Price: %.2f", p.Name, p.Price)
+	}
+}
+
 func main() {
 	// mathFunc()
 	// generateRondomNumbers()
@@ -111,5 +125,6 @@ func main() {
 	// shuffle()
 	// sorting()
 	// sortedCopy()
-	searchingSortedData()
+	// searchingSortedData()
+	sortingCustomDataTypes()
 }
