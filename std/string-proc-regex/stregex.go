@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"regexp"
 	"strings"
 	"unicode"
 
@@ -137,6 +138,29 @@ func buildString() {
 	fmt.Println("String:", builder.String())
 }
 
+func matchString() {
+	description := "A boat for one person"
+	match, err := regexp.MatchString("[A-z]oat", description)
+	if err == nil {
+		fmt.Println("Match:", match)
+	} else {
+		fmt.Println("Error:", err)
+	}
+
+	pattern, compileErr := regexp.Compile("[A-z]oat")
+	question := "Is that a goat?"
+	preference := "I like oats"
+
+	if compileErr == nil {
+		fmt.Println("Description:", pattern.MatchString(description))
+		fmt.Println("Question:", pattern.MatchString(question))
+		fmt.Println("Preference:", pattern.MatchString(preference))
+	} else {
+		fmt.Println("Error:", compileErr)
+	}
+
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
@@ -145,5 +169,6 @@ func main() {
 	// splitStrings()
 	// trimStrings()
 	// alterStrings()
-	buildString()
+	// buildString()
+	matchString()
 }
