@@ -195,6 +195,15 @@ func splitRegex() {
 	}
 }
 
+func subexpressions() {
+	pattern := regexp.MustCompile("A ([A-z]*) for ([A-z]*) person")
+	description := "Kayak. A boat for one person."
+	subs := pattern.FindStringSubmatch(description)
+	for _, s := range subs {
+		fmt.Println("Match:", s)
+	}
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
@@ -206,5 +215,6 @@ func main() {
 	// buildString()
 	// matchString()
 	// findSubStrings()
-	splitRegex()
+	// splitRegex()
+	subexpressions()
 }
