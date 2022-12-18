@@ -38,14 +38,27 @@ func generateIntRange() {
 	}
 
 	rand.Seed(time.Now().UnixNano())
-	
+
 	for i := 0; i < 5; i++ {
 		Printfln("Value %v : %v", i, IntRange(10, 20))
+	}
+}
+
+func shuffle() {
+	var names = []string{"Alice", "Bob", "Charlie", "Dora", "Edith"}
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(names), func(first, second int) {
+		Printfln("%v, %v", first, second)
+		names[first], names[second] = names[second], names[first]
+	})
+	for i, name := range names {
+		Printfln("Index %v: Name: %v", i, name)
 	}
 }
 
 func main() {
 	// mathFunc()
 	// generateRondomNumbers()
-	generateIntRange()
+	// generateIntRange()
+	shuffle()
 }
