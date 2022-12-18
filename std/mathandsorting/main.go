@@ -87,11 +87,29 @@ func sortedCopy() {
 	Printfln("Ints Sorted: %v", sortedInts)
 }
 
+func searchingSortedData() {
+	ints := []int{9, 4, 2, -1, 10}
+	sortedInts := make([]int, len(ints))
+	copy(sortedInts, ints)
+	sort.Ints(sortedInts)
+	Printfln("Ints: %v", ints)
+	Printfln("Ints Sorted: %v", sortedInts)
+
+	indexOf4 := sort.SearchInts(sortedInts, 4)
+	indexOf3 := sort.SearchInts(sortedInts, 3)
+	Printfln("Index of 4: %v", indexOf4)
+	Printfln("Index of 3: %v", indexOf3)
+
+	Printfln("Index of 4: %v (present: %v)", indexOf4, sortedInts[indexOf4] == 4)
+	Printfln("Index of 3: %v (present: %v)", indexOf3, sortedInts[indexOf3] == 3)
+}
+
 func main() {
 	// mathFunc()
 	// generateRondomNumbers()
 	// generateIntRange()
 	// shuffle()
 	// sorting()
-	sortedCopy()
+	// sortedCopy()
+	searchingSortedData()
 }
