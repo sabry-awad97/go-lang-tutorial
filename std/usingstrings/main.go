@@ -83,8 +83,23 @@ func scanSlice() {
 	Printfln("Name: %v", vals)
 }
 
+func scanNewLine() {
+	var name string
+	var category string
+	var price float64
+	fmt.Print("Enter text to scan: ")
+	n, err := fmt.Scanln(&name, &category, &price)
+	if err == nil {
+		Printfln("Scanned %v values", n)
+		Printfln("Name: %v, Category: %v, Price: %.2f", name, category, price)
+	} else {
+		Printfln("Error: %v", err.Error())
+	}
+}
+
 func main() {
 	// formatting()
 	// scan()
-	scanSlice()
+	// scanSlice()
+	scanNewLine()
 }
