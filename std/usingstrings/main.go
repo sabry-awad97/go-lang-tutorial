@@ -72,7 +72,19 @@ func scan() {
 	}
 }
 
+func scanSlice() {
+	vals := make([]string, 3)
+	ivals := make([]interface{}, 3)
+	for i := 0; i < len(vals); i++ {
+		ivals[i] = &vals[i]
+	}
+	fmt.Print("Enter text to scan: ")
+	fmt.Scan(ivals...)
+	Printfln("Name: %v", vals)
+}
+
 func main() {
 	// formatting()
-	scan()
+	// scan()
+	scanSlice()
 }
