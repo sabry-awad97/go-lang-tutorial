@@ -214,6 +214,21 @@ func namedSubexpressions() {
 	}
 }
 
+func replaceSubstring() {
+	pattern := regexp.MustCompile("A (?P<type>[A-z]*) for (?P<capacity>[A-z]*) person")
+
+	description := "Kayak. A boat for one person."
+	template := "(type: ${type}, capacity: ${capacity})"
+	replaced := pattern.ReplaceAllString(description, template)
+	fmt.Println(replaced)
+
+	replaced = pattern.ReplaceAllStringFunc(description, func(s string) string {
+		return "This is the replacement content"
+	})
+	
+	fmt.Println(replaced)
+}
+
 func main() {
 	// compareStrings()
 	// compareBytes()
@@ -227,5 +242,7 @@ func main() {
 	// findSubStrings()
 	// splitRegex()
 	// subexpressions()
-	namedSubexpressions()
+	// namedSubexpressions()
+	replaceSubstring()
+
 }
