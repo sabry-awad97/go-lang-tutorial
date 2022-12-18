@@ -3,6 +3,7 @@ package main
 import (
 	"math"
 	"math/rand"
+	"sort"
 	"time"
 )
 
@@ -56,9 +57,41 @@ func shuffle() {
 	}
 }
 
+func sorting() {
+	ints := []int{9, 4, 2, -1, 10}
+	Printfln("Ints: %v", ints)
+	sort.Ints(ints)
+	Printfln("Ints Sorted: %v", ints)
+
+	floats := []float64{279, 48.95, 19.50}
+	Printfln("Floats: %v", floats)
+	sort.Float64s(floats)
+	Printfln("Floats Sorted: %v", floats)
+
+	strings := []string{"Kayak", "Lifejacket", "Stadium"}
+	Printfln("Strings: %v", strings)
+	if !sort.StringsAreSorted(strings) {
+		sort.Strings(strings)
+		Printfln("Strings Sorted: %v", strings)
+	} else {
+		Printfln("Strings Already Sorted: %v", strings)
+	}
+}
+
+func sortedCopy() {
+	ints := []int{9, 4, 2, -1, 10}
+	sortedInts := make([]int, len(ints))
+	copy(sortedInts, ints)
+	sort.Ints(sortedInts)
+	Printfln("Ints: %v", ints)
+	Printfln("Ints Sorted: %v", sortedInts)
+}
+
 func main() {
 	// mathFunc()
 	// generateRondomNumbers()
 	// generateIntRange()
-	shuffle()
+	// shuffle()
+	// sorting()
+	sortedCopy()
 }
