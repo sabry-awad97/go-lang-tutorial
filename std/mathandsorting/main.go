@@ -1,6 +1,10 @@
 package main
 
-import "math"
+import (
+	"math"
+	"math/rand"
+	"time"
+)
 
 func mathFunc() {
 	val1 := 279.00
@@ -17,6 +21,31 @@ func mathFunc() {
 	Printfln("RoundToEven: %v", math.RoundToEven(val2))
 }
 
+func generateRondomNumbers() {
+	rand.Seed(time.Now().UnixNano())
+	for i := 0; i < 5; i++ {
+		Printfln("Value %v : %v", i, rand.Int())
+	}
+
+	for i := 0; i < 5; i++ {
+		Printfln("Value %v : %v", i, rand.Intn(10))
+	}
+}
+
+func generateIntRange() {
+	IntRange := func(min, max int) int {
+		return rand.Intn(max-min) + min
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	
+	for i := 0; i < 5; i++ {
+		Printfln("Value %v : %v", i, IntRange(10, 20))
+	}
+}
+
 func main() {
-	mathFunc()
+	// mathFunc()
+	// generateRondomNumbers()
+	generateIntRange()
 }
