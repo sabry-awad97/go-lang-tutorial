@@ -50,8 +50,30 @@ func parsingDateString() {
 	}
 }
 
+func parseLocation() {
+	layout := "02 Jan 06 15:04"
+	date := "09 Jun 95 19:30"
+	london, lonerr := time.LoadLocation("Europe/London")
+	newyork, nycerr := time.LoadLocation("America/New_York")
+	local, _ := time.LoadLocation("Local")
+
+	if lonerr == nil && nycerr == nil {
+		nolocation, _ := time.Parse(layout, date)
+		londonTime, _ := time.ParseInLocation(layout, date, london)
+		newyorkTime, _ := time.ParseInLocation(layout, date, newyork)
+		localTime, _ := time.ParseInLocation(layout, date, local)
+		PrintTime("No location:", &nolocation)
+		PrintTime("London:", &londonTime)
+		PrintTime("New York:", &newyorkTime)
+		PrintTime("Local:", &localTime)
+	} else {
+		fmt.Println(lonerr.Error(), nycerr.Error())
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
-	parsingDateString()
+	// parsingDateString()
+	parseLocation()
 }
