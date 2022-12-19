@@ -88,10 +88,22 @@ func specifyTimeZone() {
 	PrintTime("Local:", &localTime)
 }
 
+func manipulateTime() {
+	t, err := time.Parse(time.RFC822, "09 Jun 95 04:59 BST")
+	if err == nil {
+		Printfln("After: %v", t.After(time.Now()))
+		Printfln("Round: %v", t.Round(time.Hour))
+		Printfln("Truncate: %v", t.Truncate(time.Hour))
+	} else {
+		fmt.Println(err.Error())
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
 	// parsingDateString()
 	// parseLocation()
-	specifyTimeZone()
+	// specifyTimeZone()
+	manipulateTime()
 }
