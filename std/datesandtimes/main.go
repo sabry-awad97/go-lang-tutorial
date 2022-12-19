@@ -161,6 +161,28 @@ func pause() {
 	}
 }
 
+func DeferringExecution() {
+	writeToChannel := func(channel chan<- string) {
+		names := []string{"Alice", "Bob", "Charlie", "Dora"}
+
+		for _, name := range names {
+			channel <- name
+		}
+
+		close(channel)
+	}
+
+	nameChannel := make(chan string)
+	
+	time.AfterFunc(time.Second*5, func() {
+		writeToChannel(nameChannel)
+	})
+
+	for name := range nameChannel {
+		Printfln("Read name: %v", name)
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
@@ -172,5 +194,6 @@ func main() {
 	// duration()
 	// relativeDuration()
 	// parseDuration()
-	pause()
+	// pause()
+	DeferringExecution()
 }
