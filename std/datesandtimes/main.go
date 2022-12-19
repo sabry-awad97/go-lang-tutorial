@@ -286,6 +286,29 @@ func ReceivingRecurringNotifications() {
 	}
 }
 
+func newTicker() {
+	writeToChannel := func(channel chan<- string) {
+		names := []string{"Alice", "Bob", "Charlie", "Dora"}
+		ticker := time.NewTicker(time.Second / 10)
+		index := 0
+		for {
+			<-ticker.C
+			channel <- names[index]
+			index++
+			if index == len(names) {
+				ticker.Stop()
+				close(channel)
+			}
+		}
+	}
+
+	nameChannel := make(chan string)
+	go writeToChannel(nameChannel)
+	for name := range nameChannel {
+		Printfln("Read name: %v", name)
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
@@ -302,5 +325,6 @@ func main() {
 	// ReceivingTimedNotifications()
 	// NotificationsTimeoutSelect()
 	// StopReset()
-	ReceivingRecurringNotifications()
+	// ReceivingRecurringNotifications()
+	newTicker()
 }
