@@ -120,6 +120,16 @@ func duration() {
 	Printfln("Rounded Mins: %v", trunc.Minutes())
 }
 
+func relativeDuration() {
+	toYears := func(d time.Duration) int {
+		return int(d.Hours() / (24 * 365))
+	}
+	future := time.Date(2051, 0, 0, 0, 0, 0, 0, time.Local)
+	past := time.Date(1965, 0, 0, 0, 0, 0, 0, time.Local)
+	Printfln("Future: %v", toYears(time.Until(future)))
+	Printfln("Past: %v", toYears(time.Since(past)))
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
@@ -128,5 +138,6 @@ func main() {
 	// specifyTimeZone()
 	// manipulateTime()
 	// CompareTimeValues()
-	duration()
+	// duration()
+	relativeDuration()
 }
