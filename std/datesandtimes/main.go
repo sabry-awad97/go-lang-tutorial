@@ -71,9 +71,27 @@ func parseLocation() {
 	}
 }
 
+func specifyTimeZone() {
+	layout := "02 Jan 06 15:04"
+	date := "09 Jun 95 19:30"
+	london := time.FixedZone("BST", 1*60*60)
+	newyork := time.FixedZone("EDT", -4*60*60)
+	local := time.FixedZone("Local", 0)
+
+	nolocation, _ := time.Parse(layout, date)
+	londonTime, _ := time.ParseInLocation(layout, date, london)
+	newyorkTime, _ := time.ParseInLocation(layout, date, newyork)
+	localTime, _ := time.ParseInLocation(layout, date, local)
+	PrintTime("No location:", &nolocation)
+	PrintTime("London:", &londonTime)
+	PrintTime("New York:", &newyorkTime)
+	PrintTime("Local:", &localTime)
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
 	// parsingDateString()
-	parseLocation()
+	// parseLocation()
+	specifyTimeZone()
 }
