@@ -130,6 +130,18 @@ func relativeDuration() {
 	Printfln("Past: %v", toYears(time.Since(past)))
 }
 
+func parseDuration() {
+	d, err := time.ParseDuration("1h30m")
+	if err == nil {
+		Printfln("Hours: %v", d.Hours())
+		Printfln("Mins: %v", d.Minutes())
+		Printfln("Seconds: %v", d.Seconds())
+		Printfln("Millseconds: %v", d.Milliseconds())
+	} else {
+		fmt.Println(err.Error())
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
@@ -139,5 +151,6 @@ func main() {
 	// manipulateTime()
 	// CompareTimeValues()
 	// duration()
-	relativeDuration()
+	// relativeDuration()
+	parseDuration()
 }
