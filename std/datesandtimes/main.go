@@ -238,6 +238,32 @@ func NotificationsTimeoutSelect() {
 	}
 }
 
+func StopReset() {
+	writeToChannel := func(channel chan<- string) {
+		timer := time.NewTimer(time.Minute * 10)
+		go func() {
+			time.Sleep(time.Second * 2)
+			Printfln("Resetting timer")
+			timer.Reset(time.Second)
+		}()
+		Printfln("Waiting for initial duration...")
+		<-timer.C
+		Printfln("Initial duration elapsed.")
+		names := []string{"Alice", "Bob", "Charlie", "Dora"}
+		for _, name := range names {
+			channel <- name
+			//time.Sleep(time.Second * 3)
+		}
+		close(channel)
+	}
+
+	nameChannel := make(chan string)
+	go writeToChannel(nameChannel)
+	for name := range nameChannel {
+		Printfln("Read name: %v", name)
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
@@ -252,5 +278,6 @@ func main() {
 	// pause()
 	// DeferringExecution()
 	// ReceivingTimedNotifications()
-	NotificationsTimeoutSelect()
+	// NotificationsTimeoutSelect()
+	StopReset()
 }
