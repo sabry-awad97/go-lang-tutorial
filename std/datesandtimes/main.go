@@ -142,6 +142,25 @@ func parseDuration() {
 	}
 }
 
+func pause() {
+	writeToChannel := func(channel chan<- string) {
+		names := []string{"Alice", "Bob", "Charlie", "Dora"}
+
+		for _, name := range names {
+			channel <- name
+			time.Sleep(time.Second * 1)
+		}
+
+		close(channel)
+	}
+
+	nameChannel := make(chan string)
+	go writeToChannel(nameChannel)
+	for name := range nameChannel {
+		Printfln("Read name: %v", name)
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
@@ -152,5 +171,6 @@ func main() {
 	// CompareTimeValues()
 	// duration()
 	// relativeDuration()
-	parseDuration()
+	// parseDuration()
+	pause()
 }
