@@ -206,6 +206,38 @@ func ReceivingTimedNotifications() {
 	}
 }
 
+func NotificationsTimeoutSelect() {
+	writeToChannel := func(channel chan<- string) {
+		Printfln("Waiting for initial duration...")
+		<-time.After(time.Second * 2)
+		Printfln("Initial duration elapsed.")
+		names := []string{"Alice", "Bob", "Charlie", "Dora"}
+		for _, name := range names {
+			channel <- name
+			time.Sleep(time.Second * 3)
+		}
+		close(channel)
+	}
+
+	nameChannel := make(chan string)
+	go writeToChannel(nameChannel)
+	channelOpen := true
+	for channelOpen {
+		Printfln("Starting channel read")
+		select {
+		case name, ok := <-nameChannel:
+			if !ok {
+				channelOpen = false
+				break
+			}
+			Printfln("Read name: %v", name)
+
+		case <-time.After(time.Second * 2):
+			Printfln("Timeout")
+		}
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
@@ -219,5 +251,6 @@ func main() {
 	// parseDuration()
 	// pause()
 	// DeferringExecution()
-	ReceivingTimedNotifications()
+	// ReceivingTimedNotifications()
+	NotificationsTimeoutSelect()
 }
