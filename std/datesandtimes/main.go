@@ -264,6 +264,28 @@ func StopReset() {
 	}
 }
 
+func ReceivingRecurringNotifications() {
+	writeToChannel := func(channel chan<- string) {
+		names := []string{"Alice", "Bob", "Charlie", "Dora"}
+		tickChannel := time.Tick(time.Second)
+		index := 0
+		for {
+			<-tickChannel
+			channel <- names[index]
+			index++
+			if index == len(names) {
+				index = 0
+			}
+		}
+	}
+
+	nameChannel := make(chan string)
+	go writeToChannel(nameChannel)
+	for name := range nameChannel {
+		Printfln("Read name: %v", name)
+	}
+}
+
 func main() {
 	// representDateTime()
 	// FormattingTimeValues()
@@ -279,5 +301,6 @@ func main() {
 	// DeferringExecution()
 	// ReceivingTimedNotifications()
 	// NotificationsTimeoutSelect()
-	StopReset()
+	// StopReset()
+	ReceivingRecurringNotifications()
 }
