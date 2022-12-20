@@ -10,7 +10,10 @@ import (
 )
 
 func main() {
-	scanner := bufio.NewReader(os.Stdin)
+	f := os.Stdin
+	defer f.Close()
+
+	scanner := bufio.NewReader(f)
 
 	sum := 0
 
