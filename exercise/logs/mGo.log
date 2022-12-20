@@ -1,0 +1,4 @@
+customLog 2022/12/20 12:28:59 Hello there!
+customLog 2022/12/20 12:28:59 Another log entry!
+customLog 2022/12/20 12:29:45 logs_custom.go:26: Hello there!
+customLog 2022/12/20 12:29:45 logs_custom.go:27: Another log entry!
