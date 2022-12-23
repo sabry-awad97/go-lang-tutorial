@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"io"
 	"strings"
 )
@@ -116,6 +117,9 @@ func readerWrapper() {
 	var reader io.Reader = NewCustomReader(strings.NewReader(text))
 	var writer strings.Builder
 	slice := make([]byte, 5)
+
+	reader = bufio.NewReader(reader)
+
 	for {
 		count, err := reader.Read(slice)
 		if count > 0 {
