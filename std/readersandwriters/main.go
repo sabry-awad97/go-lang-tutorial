@@ -186,6 +186,25 @@ func scan() {
 	}
 }
 
+func scanSingle(reader io.Reader, val interface{}) (int, error) {
+	return fmt.Fscan(reader, val)
+}
+
+func scanGradual() {
+	reader := strings.NewReader("Kayak Watersports $279.00")
+	for {
+		var str string
+		_, err := scanSingle(reader, &str)
+		if err != nil {
+			if err != io.EOF {
+				Printfln("Error: %v", err.Error())
+			}
+			break
+		}
+		Printfln("Value: %v", str)
+	}
+}
+
 func main() {
 	// understandingReaders()
 	// understandingWriters()
@@ -197,6 +216,7 @@ func main() {
 	// limitData()
 	// readerWrapper()
 	// unbufferedWrites()
-	bufferedWrites()
-	scan()
+	// bufferedWrites()
+	// scan()
+	scanGradual()
 }
