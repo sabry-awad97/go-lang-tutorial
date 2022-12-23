@@ -78,10 +78,24 @@ func multipleReader() {
 	ConsumeData(concatReader)
 }
 
+func multipleWriters() {
+	var w1 strings.Builder
+	var w2 strings.Builder
+	var w3 strings.Builder
+	combinedWriter := io.MultiWriter(&w1, &w2, &w3)
+	GenerateData(combinedWriter)
+
+	// the same data is written to the three individual writers
+	Printfln("Writer #1: %v", w1.String())
+	Printfln("Writer #2: %v", w2.String())
+	Printfln("Writer #3: %v", w3.String())
+}
+
 func main() {
 	// understandingReaders()
 	// understandingWriters()
 	// copyData()
 	// pipe()
-	multipleReader()
+	// multipleReader()
+	multipleWriters()
 }
