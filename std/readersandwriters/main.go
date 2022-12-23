@@ -64,8 +64,15 @@ func copyData() {
 	Printfln("String builder contents: %s", builder.String())
 }
 
+func pipe() {
+	pipeReader, pipeWriter := io.Pipe()
+	go GenerateData(pipeWriter)
+	ConsumeData(pipeReader)
+}
+
 func main() {
 	// understandingReaders()
 	// understandingWriters()
-	copyData()
+	// copyData()
+	pipe()
 }
