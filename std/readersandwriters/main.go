@@ -205,6 +205,17 @@ func scanGradual() {
 	}
 }
 
+func writeFormatted() {
+	writeFormatted := func(writer io.Writer, template string, vals ...interface{}) {
+		fmt.Fprintf(writer, template, vals...)
+	}
+
+	var writer strings.Builder
+	template := "Name: %s, Category: %s, Price: $%.2f"
+	writeFormatted(&writer, template, "Kayak", "Watersports", float64(279))
+	fmt.Println(writer.String())
+}
+
 func main() {
 	// understandingReaders()
 	// understandingWriters()
@@ -218,5 +229,6 @@ func main() {
 	// unbufferedWrites()
 	// bufferedWrites()
 	// scan()
-	scanGradual()
+	// scanGradual()
+	writeFormatted()
 }
