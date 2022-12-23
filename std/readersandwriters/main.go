@@ -118,11 +118,12 @@ func readerWrapper() {
 	var writer strings.Builder
 	slice := make([]byte, 5)
 
-	reader = bufio.NewReader(reader)
-
+	buffered := bufio.NewReader(reader)
 	for {
-		count, err := reader.Read(slice)
+		count, err := buffered.Read(slice)
 		if count > 0 {
+			Printfln("Buffer size: %v, buffered: %v",
+				buffered.Size(), buffered.Buffered())
 			writer.Write(slice[0:count])
 		}
 		if err != nil {
