@@ -216,6 +216,20 @@ func writeFormatted() {
 	fmt.Println(writer.String())
 }
 
+func writeReplaced() {
+	writeReplaced := func(writer io.Writer, str string, subs ...string) {
+		replacer := strings.NewReplacer(subs...)
+		replacer.WriteString(writer, str)
+	}
+
+	text := "It was a boat. A small boat."
+	subs := []string{"boat", "kayak", "small", "huge"}
+
+	var writer strings.Builder
+	writeReplaced(&writer, text, subs...)
+	fmt.Println(writer.String())
+}
+
 func main() {
 	// understandingReaders()
 	// understandingWriters()
@@ -230,5 +244,6 @@ func main() {
 	// bufferedWrites()
 	// scan()
 	// scanGradual()
-	writeFormatted()
+	// writeFormatted()
+	writeReplaced()
 }
