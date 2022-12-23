@@ -70,9 +70,18 @@ func pipe() {
 	ConsumeData(pipeReader)
 }
 
+func multipleReader() {
+	r1 := strings.NewReader("Kayak")
+	r2 := strings.NewReader("Lifejacket")
+	r3 := strings.NewReader("Canoe")
+	concatReader := io.MultiReader(r1, r2, r3)
+	ConsumeData(concatReader)
+}
+
 func main() {
 	// understandingReaders()
 	// understandingWriters()
 	// copyData()
-	pipe()
+	// pipe()
+	multipleReader()
 }
